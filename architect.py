@@ -151,12 +151,12 @@ print(run_num)
 
 
 # Use this to resume previously completed runs
-# resume_run=14
-# resume_from_phase=1
-# copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
-# prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)
+resume_run=4
+resume_from_phase=2
+copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
+prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)
 
 # comment out the phase running if using above to resume runs
-run_phase(run_num, 1)
-run_phase(run_num, 2)
+# run_phase(run_num, 1)
+# run_phase(run_num, 2)
 run_phase(run_num, 3)
