@@ -52,15 +52,42 @@ def run_vision_phase(prev_phase_outputs):
 
     return vision_output_full, vision_output_structured
 
+def run_inputs_phase(prev_phase_outputs):
+    prompt = load_phase_file(get_phase_num('inputs', phases))
+    human_message_prompt = HumanMessagePromptTemplate.from_template(prompt)
+    chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
+
+    project = prev_phase_outputs["project"]
+    overview = prev_phase_outputs["vision"]["overview"]
+    features = prev_phase_outputs["vision"]["features"]
+
+    inputs_result = chat(chat_prompt.format_prompt(project=project, overview=overview, features=features).to_messages())
+    inputs_output_full = inputs_result.content
+
+    print('ran inputs phase:')
+    print(inputs_output_full)
+
+    final_state_index = inputs_output_full.find("# Fundamental Program Inputs")
+    fundamental_inputs = inputs_output_full[final_state_index:].strip()
+    inputs_output_structured = {
+        'fundamental_inputs': fundamental_inputs
+    }
+
+    return inputs_output_full, inputs_output_structured
+
 def run_states_phase(prev_phase_outputs):
     prompt = load_phase_file(get_phase_num('states', phases))
     human_message_prompt = HumanMessagePromptTemplate.from_template(prompt)
     chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
 
+    # project = prev_phase_outputs["project"]
+    # vision_context = prev_phase_outputs["vision"]["overview"] + "\n" + prev_phase_outputs["vision"]["features"]
     project = prev_phase_outputs["project"]
-    vision_context = prev_phase_outputs["vision"]["overview"] + "\n" + prev_phase_outputs["vision"]["features"]
+    overview = prev_phase_outputs["vision"]["overview"]
+    features = prev_phase_outputs["vision"]["features"]
+    fundamental_inputs = prev_phase_outputs["inputs"]["fundamental_inputs"]
 
-    state_result = chat(chat_prompt.format_prompt(project=project, vision_context=vision_context).to_messages())
+    state_result = chat(chat_prompt.format_prompt(project=project, overview=overview, features=features, fundamental_inputs=fundamental_inputs).to_messages())
     state_output_full = state_result.content
 
     print('ran state_output phase:')
@@ -102,8 +129,9 @@ prev_phase_outputs = {
 
 phases = {
     1: ('vision', run_vision_phase),
-    2: ('states', run_states_phase),
-    3: ('machine', run_machine_phase)
+    2: ('inputs', run_inputs_phase),
+    3: ('states', run_states_phase)
+    # 3: ('machine', run_machine_phase)
 }
 
 project = "An emoji-themed chess game written in javascript to run locally in the browser between two players"
@@ -141,7 +169,7 @@ prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_out
 
 # run_phase(run_num, 1)
 run_phase(run_num, 2)
-run_phase(run_num, 3)
+# run_phase(run_num, 3)
 
 
 

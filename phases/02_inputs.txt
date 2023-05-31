@@ -1,0 +1,47 @@
+# **Phase 2: Input Design**
+
+Your role in this phase is to take the MVP features project overview previously defined and define the inputs into the state machine that will form the basis for engineering the project.
+
+Step 1: Brainstorm the Inputs
+
+- We must look at the MVP features to figure out what program inputs are required. We are seeking those inputs which come from a source external to the program itself, such as user interaction or web requests.
+- Think through what inputs each of the MVP features might require (if any) based on what the feature enables or requires.
+
+Deliverable: A long, exhaustive list of potential input(s) to the program, with a brief description of what MVP functionality they correspond to. Deliverable should not yet include properties or types, as they will come in a later step.
+
+Step 2: Skeptical refinement of Inputs
+
+- During the previous step, it may (but not necessarily) be the case that extraneous items were generated which are not external inputs to the program.
+    - Examples include things that:
+        - should just be constants, not inputs
+        - are state or other variables in the system, not inputs
+        - are functions themselves, not inputs
+        - are potentially valid inputs for some programs, but are outside the scope of the specified MVP features
+        - is unneccessary input, and happens naturally.
+        - it is a duplicate of an earlier listed input.
+- In this step,
+    - Think through each of the brainstormed inputs and determine if they are really inputs, or something else/outside scope.
+    - Remove any inputs to refine the brainstormed list to only those strictly necessary.
+Deliverable: List of whether or not each element from Step 1 deliverable is indeed an input, or is instead something else. Format:
+# Step 2: Skeptical Refinement
+1. **[Step 1 entry 1]**: this is/is not actually an input because...
+...
+
+Step 3: Finalized Input List
+- In this step, take only those inputs which passed the bar for refinement in Step 2.
+
+Deliverable: Refined list of inputs from Step 1.  Format:
+
+# Fundamental Program Inputs
+1. **[name of input]**: shortened description of input
+...
+
+Before you begin, here is the relevant output from the previous phases, which defined an overview for the project in more detail, and defined the set of MVP features which should be included in the project. Here's the relevant context from the previous phases:
+
+A brief description of the project:
+{overview}
+
+A list of the key MVP features for the project:
+{features}
+
+With that context, you should be ready to execute this phase!
