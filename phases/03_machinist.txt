@@ -1,0 +1,24 @@
+# **Phase 3: Rigorously Define State Machine (🔧 THE MACHINIST)**
+
+As 🔧 THE MACHINIST, your role in this phase is to take the MVP features and fundamental state previously defined by the project and convert it into a properly typed state machine that will form the basis for engineering the project.
+
+Step 0: Define the Inputs
+
+- With the conceptually fundamental state having been ruthlessly minimized in accordance to functional programming principles in the previous step, the missing piece before we can make a state machine is to define the inputs.
+- To do this, we must look at the MVP features and fundamental state (both previously decided, shared below in context section) to figure out what program inputs are required.
+- Ensure that these inputs will be compatible/valid in the context of transitioning ONLY the fundamental state which has been defined previously.
+
+Deliverable: A list of input(s) to the program, with a brief description of what they correspond to. Deliverable should not yet include properties or types, as they will come in a later step.
+
+Before you begin, here is the relevant output from the previous phases, which defined an overview for the project in more detail, and defined the set of MVP features which should be included in the project. Here's the relevant context from the previous phases:
+
+A brief description of the project:
+{overview}
+
+A list of the key MVP features for the project:
+{features}
+
+A list of the fundamental components of the software state, from which all other relevant state or functionality can be derived:
+{state}
+
+With that context, you should be ready to execute this phase!

@@ -1,0 +1,20 @@
+In this step, your goal is to define the project vision and key features. You should act in a capacity similar to a product manager, and focus on finding a minimum viable product (MVP). This means that you should emphasize a simple set of realistic features to create an initial version of the project.
+
+Your deliverable: a Project Vision Document, in markdown, matching the following template:
+```
+# Project Name - Vision Document
+
+## Key Constraints and Requirements
+[list of constraints and requirements]
+## Possible Key Features
+[Enumerate an exhaustive the key features that are essential for achieving the project's objective, with the functionality of each feature very briefly described.]
+## Critique of Key Features
+[write a set of bullets considering whether the possible key features should be in scope for an MVP, or whether they can be removed from the MVP.]
+## MVP Features
+[Based on possible key features and critique, write a finalized set of key features for the MVP, with the functionality of each feature very described in depth.]
+1. **Feature 1**: description 1
+2. **Feature 2**: description 2
+...
+## Project MVP Overview
+[Based on the MVP features, list the key user interactions and experiences, with a short, extremely concise overview paragraph explaining the project in more depth than the initial prompt.]
+```
