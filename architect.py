@@ -142,16 +142,6 @@ def run_phase(run_num, phase_num):
     phase_output_full, phase_output_structured = phase_func(prev_phase_outputs)
     prev_phase_outputs[phase_name] = phase_output_structured
 
-    # prev_phase_output = ""
-    # if phase_num > 1:
-    #     prev_phase_output = get_phase_output(phase_num-1, run_num)
-
-    # phase_output = ""
-    # if phase_num == 1:
-    #     phase_output_full, phase_output_structured = run_vision_phase(phase_num, project)
-    # # if phase_num == 2:
-    # #     phase_output = run_states_phase(phase_num, project, prev_phase_output)
-    
     write_phase_output(phase_output_full, phase_output_structured, phase_num, run_num)
 
 
@@ -159,43 +149,14 @@ run_num = get_run_num()
 print("beginning run:")
 print(run_num)
 
-resume_run=14
-resume_from_phase=1
-copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
-prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)
 
-# print("new outputs:")
-# print(prev_phase_outputs)
+# Use this to resume previously completed runs
+# resume_run=14
+# resume_from_phase=1
+# copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
+# prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)
 
-# run_phase(run_num, 1)
+# comment out the phase running if using above to resume runs
+run_phase(run_num, 1)
 run_phase(run_num, 2)
-# run_phase(run_num, 3)
-
-
-
-# # Find the indices of the section headers
-# feature_index = vision_output.find("## MVP Features")
-# overview_index = vision_output.find("## Project MVP Overview")
-
-# # Extract the sections
-# mvp_features = vision_output[feature_index:overview_index].strip()
-# project_overview = vision_output[overview_index:].strip()
-
-# prev_step = project_overview + "\n" + mvp_features
-
-# with open('brainstorm_state.txt', 'r') as file:
-#     step = file.read()
-
-
-# human_template=step
-# human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
-# chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
-
-# messages = chat_prompt.format_prompt(project=project, prev_step=prev_step).to_messages()
-# print('next step messages:')
-# print(messages)
-
-# brainstorm_result = chat(messages)
-# brainstorm_output = brainstorm_result.content
-# print("full brainstorm output:")
-# print(brainstorm_output)
+run_phase(run_num, 3)
