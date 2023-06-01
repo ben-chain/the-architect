@@ -109,9 +109,10 @@ def run_machine_phase(prev_phase_outputs):
     project = prev_phase_outputs["project"]
     overview = prev_phase_outputs["vision"]["overview"]
     features = prev_phase_outputs["vision"]["features"]
-    state = prev_phase_outputs["states"]["fundamental_state"]
+    fundamental_inputs = prev_phase_outputs["inputs"]["fundamental_inputs"]
+    fundamental_state = prev_phase_outputs["states"]["fundamental_state"]
 
-    machine_result = chat(chat_prompt.format_prompt(project=project, overview=overview, features=features, state=state).to_messages())
+    machine_result = chat(chat_prompt.format_prompt(project=project, overview=overview, features=features, fundamental_inputs=fundamental_inputs, fundamental_state=fundamental_state).to_messages())
     machine_output_full = machine_result.content
 
     print('ran machinist phase:')
@@ -130,8 +131,8 @@ prev_phase_outputs = {
 phases = {
     1: ('vision', run_vision_phase),
     2: ('inputs', run_inputs_phase),
-    3: ('states', run_states_phase)
-    # 3: ('machine', run_machine_phase)
+    3: ('states', run_states_phase),
+    4: ('machine', run_machine_phase)
 }
 
 project = "An emoji-themed chess game written in javascript to run locally in the browser between two players"
@@ -151,12 +152,13 @@ print(run_num)
 
 
 # Use this to resume previously completed runs
-resume_run=4
-resume_from_phase=2
+resume_run=33
+resume_from_phase=3
 copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
 prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)
 
 # comment out the phase running if using above to resume runs
 # run_phase(run_num, 1)
 # run_phase(run_num, 2)
-run_phase(run_num, 3)
+# run_phase(run_num, 3)
+run_phase(run_num, 4)

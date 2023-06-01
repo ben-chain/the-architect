@@ -1,0 +1,69 @@
+# **Phase 4: Rigorously Define State Machine (🔧 THE MACHINIST)**
+
+As 🔧 THE MACHINIST, your role in this phase is to take the MVP features, fundamental inputs, and fundamental state previously defined by the project and convert it into a properly typed state machine that will form the basis for engineering the project.
+
+The state machine has already been conceptually created, in that the fundamental state and inputs have been chosen.  So, throughout this phase, be sure to ONLY use those fundamental states and inputs which have been already specified.  Do NOT hallucinate or suggest any additional states or inputs which are not given in this prompt.
+
+Step 1: Brainstorm Fundamental State and Input Subsets
+- In this step, you will brainstorm a list of ways to break down the fundamental inputs and states into useful subsets of all possible states, so that they can be used to make a more granular conceptual state machine which the program can be based on.
+    - Examples of useful input subsets include, but are not limited to, inputs which progress the state vs. those which are invalid or no-ops.
+    - As another example, if a piece of fundamental state is an integer, substate could be "fundamental state [name of integer] with value greater than 17".
+    - Examples of useful state subsets include, but are not limited to, initial and final states.
+- When brainstorming state subsets, take special care to look for subsets of state which correspond to specific individual fundamental inputs. In other words, consider how each individual input on its own could transition the state corresponding to a particular state subset.
+- In this brainstorm phase, try to make a long and exhaustive list vs. just a single breakdown. In other words, this deliverable is not a single partition of states and inputs, it's as many partitions as you can come up with to consider in subsequent steps.
+- Assign each brainstormed subset a name to use in future steps.
+- During the state brainstorm, consider how each individual input subset might influence the state, and try to break down the state so that the subsets can be transitioned between by the input subsets.
+
+Deliverable: list of ways to break down each of the fundamental inputs and fundamental states into subsets which could be used to build a state machine. Give each a name to use in later steps. Format:
+# State and Input Breakdown
+## Potential Input Subsets
+- InputSubset1: description
+...
+## Potential State Subsets
+- StateSubset1: description
+...
+
+Step 2: Conceptual State Diagram
+- In this step, you will connect the "conceptual dots" of the state and input together to create a conceptual state diagram.
+- After considering the input and state subsets brainstormed above, choose the most logically consistent and useful breakdowns to form a state diagram.
+- You do not need to (and probably shouldn't) use all subset breakdowns brainstormed above, but in totality, the state diagram should cover all possible states of the program and all possible inputs, forming a complete overview of the program lifecycle.
+- The states in this diagram should correspond to written english descriptions of subsets of the fundamental state already specified.
+    - For example, if a piece of fundamental state is an integer, state nodes in the diagram could be labelled "fundamental state [name of integer] with value greater than 17".
+    - EVERY state in the state diagram should specify what fundamental state it corresponds to in addition to any conditions.
+- The transition arrows in the diagram should correspond to, and explicitly identify, the specific fundamental inputs.  If necessary, they should also include a description of subsets of the possible inputs corresponding to that transition.
+    - EVERY transition (AKA arrow) in the diagram should specify what single fundamental input it corresponds to in addition to any conditions.
+- Do NOT couple multiple fundamental states or inputs together. If individual state or input is listed as a unique component in their respective lists, the should be addressed with independent transitions. In other words, single transitions should ONLY correspond to a single fundamental input.
+
+Deliverable: State Diagram, formatted in UML based on the following format:
+# Chosen subsets
+[list best logical choice of subsets, such that all fundamental state and input are represented in some subset, and reasoning for choice]
+# Initial State Diagram
+```plantuml
+@startuml
+
+[*] --> StateSubset1
+
+StateSubset1 -> StateSubset2: InputSubset1
+StateSubset2 -> StateSubset1: InputSubset2
+
+StateSubset2 --> [*]
+
+@enduml
+```
+
+
+Before you begin, here is the relevant output from the previous phases, which defined an overview for the project, the set of MVP features, the program inputs, and the program's fundamental state:
+
+A brief description of the project:
+{overview}
+
+A list of the key MVP features for the project:
+{features}
+
+The fundamental inputs to the project's program:
+{fundamental_inputs}
+
+The fundamental state of the project's program which the inputs will change:
+{fundamental_state}
+
+With that context, you should be ready to execute this phase!
