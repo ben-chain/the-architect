@@ -4,55 +4,85 @@ As 🔧 THE MACHINIST, your role in this phase is to take the MVP features, fund
 
 The state machine has already been conceptually created, in that the fundamental state and inputs have been chosen.  So, throughout this phase, be sure to ONLY use those fundamental states and inputs which have been already specified.  Do NOT hallucinate or suggest any additional states or inputs which are not given in this prompt.
 
-Step 1: Brainstorm partitioning strategies
-- In this step, you will brainstorm all the different ways in which the fundamental inputs and state could be partitioned into a more granular state machine.
-- For each fundamental input and state, brainstorm a list of brief descriptions of how it could be partitioned. Examples include, but are not limited to:
-    - inputs which progress the state vs. those which are invalid or no-ops
-    - substates which meet or do not meet some logical condition
-- When partitioning state, take special care to consider the partitioning strategy based on the kind of input that would be expected to recieve next. While some inputs may be applicable for all states, often inputs will only be valid in the context of a particular subset of the state, and you can build a partitioning strategy around that.
-- In this step, try to come up with as many possible approaches to partitioning as possible
-Deliverable: Long, extensive, thorough list of partitioning strategies.  Format:
-# Fundamental Input Partitioning strategies
-- Input 1
-    - Partition by... [input 1 partition strategy 1]
-    - Partition by... [input 1 partition strategy 2]
-...
-# Fundamental State Partitioning strategies
-- State 1
-    - Partition by... [state 1 partition strategy 1]
-    - Partition by... [state 1 partition strategy 2]
-...
+Step 1: Brainstorm State Partitioning Strategies
+- In this step, you will brainstorm different approaches to partitioning the fundamental state based on the relevant program inputs.
+- For each state, consider how it would be partitioned according to each input.
+- This should allow us to define a more granular state machine in which we transition between subsets of the fundamental state based on input.
 
-Step 2: Select partitioning strategies and enumerate final subsets
-- Based on the partitioning options, select the "best" partitioning strategy for each input and state, such that:
-    - The partitions are as granular as possible, unless completely and obviously redundant/duplicative
-    - The resulting state machine conveys as much useful information about the system as possible to inform implementation
-- Start by deliberating a bit on what the best options would be for partitioning, then once the option is chosen, enumerate and name the subsets which will form the partition.
-
-Deliverable format:
-# Input Partition Deliberation
-Input 1: the [partition strategy N] is the best option because [justification for why "best"]
-...
-# State Partition Deliberation
-State 1: the [partition strategy N] is the best option because [justification for why "best"]
-...
-# Final Partitions
-## Input Subsets
-- Input1
-    - Input1Subset1: description
-    ...
-...
-## Potential State Subsets
-- State1
-    - State1Subset1: description
+Deliverable: Long, extensive, thorough list of partitioning strategies. Format:
+# Brainstormed State Partitioning strategies
+1. State 1
+    a. Partition by [input 1] so that [description of subsets and conditions for each]
+    b. Partition by [input 2] so that [description of subsets and conditions for each]
     ...
 ...
 
+Step 2: Input Partitioning Strategy to define transitions
+- In this step, we will define the ways in which each possible input could be partitioned into subsets.
+- The resulting subsets should be made such that each subset of the state defined in Step 1 has all of the transitions to and from it defined, corresponding to the subset of inputs defined in this partitioning Step 2.
+- Always specify the qualities of the fundamental state which are transitioned or changed in this step.
+- List all Inputs again in this step. If there are none missing, state that, with a justification for why the existing transitions cover all possible cases.
+Deliverable: list of all possible transtions and the subset of inputs they correspond to.  Format:
+# Initial Transitions
+1. **[Input 1]**
+    a. [Transition1Name]
+        - Corresponds to subset of [Input 1] where [condition for subset of Input 1]
+        - Moves from [state subset X] to [state subset Y]
+    a. [Transition2Name]
+        ...
+    OR
+    - No additional transitions are needed because [reason why existing transitions cover all cases]
+...
 
-Step 3: Conceptual State Diagram
-- In this step, you will connect the "conceptual dots" of the state and input together to create a conceptual state diagram for the project, based on the finalized partitions above.
-- Each node in the state diagram should correspond to a SINGLE state subset from the chosen partitions.
-- Each arrow in the state diagram should correspond to a SINGLE input subset from the chosen partition.
+Step 3: Identify and missing transitions
+- In this step, for each input, we will look at the Initial Transitions and determine whether any INPUTS are missing from the list defined in step 2. Even if all meaningful transitions have been defined, we must consider all possible inputs to properly define a state machine.
+    - A common example of a missing input would be "invalid" inputs which cause no-op transitions.
+- For each Input, look at the Initial transitions and brainstorm kinds of inputs which would be missing from the subsets for the Initial Transitions
+- Then, write up the additional transitions needed for a full view of the system.
+Deliverable: list of additional transitions
+# Missing input brainstorm
+1. **[input 1]**
+    - inputs which [condition/type of input, e.g. invalid] are missing from the Initial Transitions for Input 1.
+    ...
+# Additional Transitions
+1. **[Input 1]**
+    a. [Transition1Name]
+        - Corresponds to subset of [Input 1] where [condition for subset of Input 1]
+        - Moves from [state subset X] to [state subset Y]
+    a. [Transition2Name]
+        ...
+...
+
+Step 4: State Partition based on transitions
+- Now that we have identified all of the possible transitions for the state machine, we need to break down the fundmanetal state into substates which logically correspond to the different transition types.
+- Based on the transitions identified in steps 2 and 3, write down subsets of the Fundamental State which are useful to move between via the transitions.
+Deliverable: Named list of substates and description.  Format:
+# Final substate partition
+1. **[fundamental state 1]**
+    a. **[State1Subset1Name]**: brief description and relevant transitions it relates to
+    b. **[State1Subset2Name]**: ...
+    ...
+...
+
+Step 5: State Hierarchy Tree
+- In this step, with all state subsets and transitions defined, we must define a hierarchy of state to utilize in the state diagram.
+- Consider which of the fundamental states are the most abstract/high-level, vs. those that are more low-level and granular, to determine a good abstraction for the state machine.
+- If sufficiently complex, the hierarchy may nest in several layers, like a tree.
+Deliverable: State hierarchy in preparation to build Hierarchical State Machine.  Format:
+# Considerations for State Hierarchy
+[internal step-by-step thinking and deliberation about why each of the fundamental states might be more fundamental or granular than others]
+# Final State Hierarchy
+- TopLevelFundmantalStateX
+    - NestedFundamentalStateY
+        - EvenMoreNestedFundamentalStateZ
+    - NestedFundamentalStateW
+
+
+Step 5: Conceptual State Diagram
+- In this step, you will connect the "conceptual dots" of the state and input together to create a conceptual state diagram for the project, based on the transitions and state subsets defined above.
+- Each node in the state diagram should correspond to a SINGLE named state subset from the Step 4 paritions. When there are multiple fundamental states, nest the state diagram.
+- Each arrow in the state diagram should correspond to a SINGLE named input subset/transition defined above.
+- Utilize the State Hierarchy Tree to build the diagram, so that the top-level state is the outermost in the diagram. (In the example below, State 1 would be at the top of the hierarchy.)
 
 Deliverable: State Diagram, formatted in md/UML.  An example syntax is provided below:
 
@@ -64,16 +94,16 @@ Deliverable: State Diagram, formatted in md/UML.  An example syntax is provided 
 
 state State1Subset1 {{
   [*] --> State2Subset1
-  State2Subset1 --> State2Subset2 : Input1Subset1
-  State2Subset2 --> State2Subset1 : Input1Subset2
-  State2Subset1 --> [*] : Input2Subset1
+  State2Subset1 --> State2Subset2 : Transition1Name
+  State2Subset2 --> State2Subset1 : Transition2Name
+  State2Subset1 --> [*] : Transition3Name
 }}
 
 State State1Subset2 {{
 
 }}
 
-State1Subset1 --> State1Subset2 : Input2Subset2
+State1Subset1 --> State1Subset2 : Transition4Name
 State1Subset2 --> [*]
 
 @enduml
