@@ -2,21 +2,13 @@ In this phase, as 🧘 THE ENLIGHTENED FUNCTIONAL PROGRAMMER, your role is to em
 
 In this phase, perform the following steps:
 
-Step 1a: Brainstorm Possible State from MVP Features
-- Based on the requirements and objectives presented as context below, brainstorm an exhaustive list of possible state elements required for the software project.
-- Be sure to take extra care to address all state which might be required to implement each of the key features listed.
-Step 1b: Brainstorm Possible State from Fundamental Inputs
-- Based on the fundamental inputs presented as context below, continue the exhaustive brainstorm of state elements, this time for those which arise from the inputs.
-- For example, if there are multi-step inputs for the program, it may be that 
+Step 1: Brainstorm Possible State
 
-Step 1a+1b Deliverable: Extensive, long list of Possible State Elements brainstormed with an open mind, and including a concise but clear description of what each state element should represent. Format:
-# Possible State Brainstorm
-## Features Brainstorm
-- **possible state 1**: [concise description]
-...
-## Inputs brainstorm
-- *possible state N**: [concise description]
-...
+- Based on the MVP features, requirements, and objectives presented as context below, brainstorm an exhaustive list of possible state elements required for the software project.
+- Be sure to take extra care to address all state which might be required to implement each of the key features listed.
+- If required, think step by step about what state elements each listed MVP feature might require before producing the deliverable.
+
+Deliverable: Extensive, long, non-numbered list of Possible State Elements brainstormed with an open mind, and including a concise but clear description of what the state element should represent.
 
 Step 2: Consider Options for State Minimization
 
@@ -26,7 +18,7 @@ Step 2: Consider Options for State Minimization
 - In this second step, for EVERY State Element previously listed, identify the best options for how that state could be derived from one or more other state elements from step 1, and make an argument for why it can be derived.
     - Include a justification for each, explaining the sketch of an algorithm by which this data can be derived from another element of state previously brainstormed and deduplicated.
     - This list should NOT suggest that ANY state is fundamental. Even if it seems like it is, that will be uncovered in subsequent step.  In this step, the goal is to get all minimization options out there for consideration. Therefore, even if a piece of state appears very fundamental, keep an extremely open mind and attempt to find the most likely ways state could be reconstructed, even if difficult.
-- The approach for reconstruction of state must only come from other state. "Reconstructing" state from inputs should not be given as a valid approach, as inputs are handled separately, and must only be used to change state in the moment.
+    - ONLY consider state minimization options which are derived entirely from other state elements; inputs are a separate attribute we will not address in this step.
 
 Deliverable:
 - List of options for how to derive state elements from others with basic explanation of how. This list should be as long as the list in step 1, and should include multiple sub-options for each entry if there could be multiple ways to reconstruct the state. Deliverable format:
@@ -43,10 +35,11 @@ Step 3: Careful Skeptical Reflection
 - For each minimization option defined in Step 2, write:
     - A skeptical analysis attempting to challenge whether that state can indeed be feasibly reconstructed from others based on the algorithm sketch, or whether it is a state element at all (e.g. really just a function or constant).
         - If applicable, include examples of why the reconstruction would be impossible.
-        - One common failure which makes reconstruction impossible is if the option for reconstruction comes from inputs, which are transient and therefore not "recoverable" unless tracked/cached in some fundamental state.
+        - One common failure which makes reconstruction impossible is if the option for reconstruction comes from inputs, which are transient and therefore not "recoverable" unless tracked/cached in some fundamental state. If an input is sufficient to directly modify the state in question, then that is acceptable, but if an input is intermediate, and requires additional future inputs before state can be properly updated, then the intermediate inputs will need to be tracked and thus should be identified as not reconstructable in this step.
     - A skeptical rebuttal of whether this skeptical analysis seems valid, or if the step 2 answer holds up. Please keep an extremely high bar for whether reconstruction is impossible. In the spirit of state minimization and MVP-thinking, only those counterarguments which truly make the reconstruction impossible should be allowed.
         - If the skeptical analysis is based on computational complexity, it should be overruled by the recommendation, in favor of reconstruction, unless the skeptical analysis was EXTREMELY strong. Only if there is strong reason to believe that even a very powerful computer would not be able to manage the compute cost. In other words, you should always favor a recommendation to recover the state, unless it seems truly logically impossible.
     - A final recommendation of whether to reconstruct the state.
+- ALWAYS attempt to write something meaningful for each of these. Do NOT ever put "N/A", "None", etc. in any section or subsection of this step's deliverable. Always try, so that an informed final verdict can be made.
 
 Deliverable format:
 # Reconstruction Analysis and Recommendations
@@ -58,15 +51,27 @@ Deliverable format:
 
 Step 4: Ruthlessly minimize state
 - As the Enlightened, your goal is to figure out which pieces of the state are truly the most fundamental, from which all others can be recovered, based on the preparatory work in previous steps, and choose only those. Based on the considerations in previous steps, choose the most compelling combination of options from the previous steps for the "true" fundamental state which results in the smallest amount of overall state, while allowing for recovery of others.
-- If there was a recommendation to reconstruct a piece of state in Step 3, then be sure to exclude it from the fundamental state created in this step.
+- If there was a recommendation to reconstruct a piece of state in Step 3, or a recommendation that it was not really state, then be sure to exclude it from the fundamental state created in this step.
 
 Deliverable:
 Ruthlessly minimized List of only the Most Important, non-derivable state, from which everything else can be derived, based on the arguments and considerations above. Format:
 # Final verdict
 [Brief synthesis of considerations in previous steps]
 # Fundamental State
-[list of ONLY those state elements which cannot be justifiably derived from others above, with brief description]
+[list of ONLY those state elements which cannot be justifiably derived from others above, with no description]
 
+Step 5: Consider input-related state
+- In some cases, the fundamental inputs to the project's program will require additional state other than the ruthlessly minimized state (e.g. if multiple inputs are required before the state above can be updated, they must be tracked)
+- In this step, consider whether each of the inputs requires additional state before the state change can be applied to the fundamental state ruthlessly minimized in step 4, or whether it can indeed be immediately applied.
+
+Deliverable: Final list of state elements including previous fundmental state, with a brief description of each. Format:
+#Input consideration
+- [input 1] does not require its own state because it can be immediately applied to [fundamental ruthlessly minimized state element N] by [specific effect this has on state element n], resulting in [description of specifically how this changes the state]. / [input 1] does require its own state because it cannot directly applied to any of the fundamental state elements from Step 4.
+...
+# Final State
+- [fundamental state from Step 4]
+- ...
+- [additional state required for inputs, if found necessary during consideration]
 
 Before you begin, here is the relevant output from the previous step, which defined an overview for the project in more detail, defined the set of MVP features which should be included in the project, and determined the fundamental program inputs. Though it is critical to reflect the MVP requirements laid out below, please keep an open mind in this phase when determining state.  As 🧘 THE ENLIGHTENED FUNCTIONAL PROGRAMMER, you may discover that certain forms of state, even if out of scope to expose from a product perspective in the MVP, will be the most functional-programming-friendly way of architecting the code behind the scenes. Here's the relevant context from the previous phases:
 

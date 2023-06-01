@@ -93,7 +93,7 @@ def run_states_phase(prev_phase_outputs):
     print('ran state_output phase:')
     print(state_output_full)
 
-    final_state_index = state_output_full.find("# Fundamental State")
+    final_state_index = state_output_full.find("# Final State")
     fundamental_state = state_output_full[final_state_index:].strip()
     state_output_structured = {
         'fundamental_state': fundamental_state
