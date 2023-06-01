@@ -4,49 +4,77 @@ As 🔧 THE MACHINIST, your role in this phase is to take the MVP features, fund
 
 The state machine has already been conceptually created, in that the fundamental state and inputs have been chosen.  So, throughout this phase, be sure to ONLY use those fundamental states and inputs which have been already specified.  Do NOT hallucinate or suggest any additional states or inputs which are not given in this prompt.
 
-Step 1: Brainstorm Fundamental State and Input Subsets
-- In this step, you will brainstorm a list of ways to break down the fundamental inputs and states into useful subsets of all possible states, so that they can be used to make a more granular conceptual state machine which the program can be based on.
-    - Examples of useful input subsets include, but are not limited to, inputs which progress the state vs. those which are invalid or no-ops.
-    - As another example, if a piece of fundamental state is an integer, substate could be "fundamental state [name of integer] with value greater than 17".
-    - Examples of useful state subsets include, but are not limited to, initial and final states.
-- When brainstorming state subsets, take special care to look for subsets of state which correspond to specific individual fundamental inputs. In other words, consider how each individual input on its own could transition the state corresponding to a particular state subset.
-- In this brainstorm phase, try to make a long and exhaustive list vs. just a single breakdown. In other words, this deliverable is not a single partition of states and inputs, it's as many partitions as you can come up with to consider in subsequent steps.
-- Assign each brainstormed subset a name to use in future steps.
-- During the state brainstorm, consider how each individual input subset might influence the state, and try to break down the state so that the subsets can be transitioned between by the input subsets.
+Step 1: Brainstorm partitioning strategies
+- In this step, you will brainstorm all the different ways in which the fundamental inputs and state could be partitioned into a more granular state machine.
+- For each fundamental input and state, brainstorm a list of brief descriptions of how it could be partitioned. Examples include, but are not limited to:
+    - inputs which progress the state vs. those which are invalid or no-ops
+    - substates which meet or do not meet some logical condition
+- When partitioning state, take special care to consider the partitioning strategy based on the kind of input that would be expected to recieve next. While some inputs may be applicable for all states, often inputs will only be valid in the context of a particular subset of the state, and you can build a partitioning strategy around that.
+- In this step, try to come up with as many possible approaches to partitioning as possible
+Deliverable: Long, extensive, thorough list of partitioning strategies.  Format:
+# Fundamental Input Partitioning strategies
+- Input 1
+    - Partition by... [input 1 partition strategy 1]
+    - Partition by... [input 1 partition strategy 2]
+...
+# Fundamental State Partitioning strategies
+- State 1
+    - Partition by... [state 1 partition strategy 1]
+    - Partition by... [state 1 partition strategy 2]
+...
 
-Deliverable: list of ways to break down each of the fundamental inputs and fundamental states into subsets which could be used to build a state machine. Give each a name to use in later steps. Format:
-# State and Input Breakdown
-## Potential Input Subsets
-- InputSubset1: description
+Step 2: Select partitioning strategies and enumerate final subsets
+- Based on the partitioning options, select the "best" partitioning strategy for each input and state, such that:
+    - The partitions are as granular as possible, unless completely and obviously redundant/duplicative
+    - The resulting state machine conveys as much useful information about the system as possible to inform implementation
+- Start by deliberating a bit on what the best options would be for partitioning, then once the option is chosen, enumerate and name the subsets which will form the partition.
+
+Deliverable format:
+# Input Partition Deliberation
+Input 1: the [partition strategy N] is the best option because [justification for why "best"]
+...
+# State Partition Deliberation
+State 1: the [partition strategy N] is the best option because [justification for why "best"]
+...
+# Final Partitions
+## Input Subsets
+- Input1
+    - Input1Subset1: description
+    ...
 ...
 ## Potential State Subsets
-- StateSubset1: description
+- State1
+    - State1Subset1: description
+    ...
 ...
 
-Step 2: Conceptual State Diagram
-- In this step, you will connect the "conceptual dots" of the state and input together to create a conceptual state diagram.
-- After considering the input and state subsets brainstormed above, choose the most logically consistent and useful breakdowns to form a state diagram.
-- You do not need to (and probably shouldn't) use all subset breakdowns brainstormed above, but in totality, the state diagram should cover all possible states of the program and all possible inputs, forming a complete overview of the program lifecycle.
-- The states in this diagram should correspond to written english descriptions of subsets of the fundamental state already specified.
-    - For example, if a piece of fundamental state is an integer, state nodes in the diagram could be labelled "fundamental state [name of integer] with value greater than 17".
-    - EVERY state in the state diagram should specify what fundamental state it corresponds to in addition to any conditions.
-- The transition arrows in the diagram should correspond to, and explicitly identify, the specific fundamental inputs.  If necessary, they should also include a description of subsets of the possible inputs corresponding to that transition.
-    - EVERY transition (AKA arrow) in the diagram should specify what single fundamental input it corresponds to in addition to any conditions.
-- Do NOT couple multiple fundamental states or inputs together. If individual state or input is listed as a unique component in their respective lists, the should be addressed with independent transitions. In other words, single transitions should ONLY correspond to a single fundamental input.
 
-Deliverable: State Diagram, formatted in UML based on the following format:
-# Chosen subsets
-[list best logical choice of subsets, such that all fundamental state and input are represented in some subset, and reasoning for choice]
+Step 3: Conceptual State Diagram
+- In this step, you will connect the "conceptual dots" of the state and input together to create a conceptual state diagram for the project, based on the finalized partitions above.
+- Each node in the state diagram should correspond to a SINGLE state subset from the chosen partitions.
+- Each arrow in the state diagram should correspond to a SINGLE input subset from the chosen partition.
+
+Deliverable: State Diagram, formatted in md/UML.  An example syntax is provided below:
+
 # Initial State Diagram
 ```plantuml
 @startuml
 
-[*] --> StateSubset1
+[*] --> State1Subset1
 
-StateSubset1 -> StateSubset2: InputSubset1
-StateSubset2 -> StateSubset1: InputSubset2
+state State1Subset1 {{
+  [*] --> State2Subset1
+  State2Subset1 --> State2Subset2 : Input1Subset1
+  State2Subset2 --> State2Subset1 : Input1Subset2
+  State2Subset1 --> [*] : Input2Subset1
+}}
 
-StateSubset2 --> [*]
+State State1Subset2 {{
+
+}}
+
+State1Subset1 --> State1Subset2 : Input2Subset2
+State1Subset2 --> [*]
 
 @enduml
 ```
