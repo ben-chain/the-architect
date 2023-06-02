@@ -61,12 +61,26 @@ Ruthlessly minimized List of only the Most Important, non-derivable state, from 
 [list of ONLY those state elements which cannot be justifiably derived from others above, with no description]
 
 Step 5: Consider input-related state
-- In some cases, the fundamental inputs to the project's program will require additional state other than the ruthlessly minimized state (e.g. if multiple inputs are required before the state above can be updated, they must be tracked)
-- In this step, consider whether each of the inputs requires additional state before the state change can be applied to the fundamental state ruthlessly minimized in step 4, or whether it can indeed be immediately applied.
+- Recall that in the previous step, we arrived at the ruthlessly minimized state – the bare minimum of state elements from which all other states can be derived. In this step, ONLY consider these fundamental state elements. All other state elements identified in Step 1 have been minimized away and should NOT be considered.
+- Evaluate each input in the context of this minimized state:
+    - For each input, determine whether it requires its own additional state before it can be applied to the ruthlessly minimized state. If the input cannot be immediately and directly applied to any of the ruthlessly minimized state elements, it requires its own state.
+    - To do this, consider why it might or might not be able to be directly applied, by:
+        - Considering specific potential reasons why it couldn't directly be applied
+            - Keep an open mind in this step and attempt to make an argument why it couldn't be applied, even if it might not hold up. Do NOT list "None", "N/A", etc. in this section.
+        - Considering PRECISELY how the fundamental state element would be modified by the input, if it can be. Ensure this modification to the state relates directly and exclusively to the ruthlessly minimized state element, and is not dependent on any other state elements from Step 1 that have been minimized away.
+        - Making a final call based on the above 
+- This may require bringing back a previously minimized state in some cases.
 
 Deliverable: Final list of state elements including previous fundmental state, with a brief description of each. Format:
 #Input consideration
-- [input 1] does not require its own state because it can be immediately applied to [fundamental ruthlessly minimized state element N] by [specific effect this has on state element n], resulting in [description of specifically how this changes the state]. / [input 1] does require its own state because it cannot directly applied to any of the fundamental state elements from Step 4.
+- [input 1] 
+    - Apply to: [XYZ Fundamental state from step 4]
+        - Reasons against application feasibility: [reasons why input 1 could not be applied to XYZ fundamental state]
+        - Reasons for feasibility: [description of specifically how this changes XYZ fundamental state from step 4, related precisely to input 1]. This does not require any additional state because [reason why input 1 is sufficient to update state XYZ directly]
+    - Final verdict:
+        - Can't be applied directly to state, requires: [additional state]
+        OR
+        - Can be applied directly
 ...
 # Final State
 - [fundamental state from Step 4]

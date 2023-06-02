@@ -18,7 +18,7 @@ from helpers import load_phase_file, get_run_num, write_phase_output, get_phase_
 
 load_dotenv()
 
-chat = ChatOpenAI(temperature=0.8,model_name='gpt-4')
+chat = ChatOpenAI(temperature=0.5,model_name='gpt-4')
 system_template = ""
 with open('system_template.txt', 'r') as file:
     system_template = file.read()
@@ -126,6 +126,7 @@ def run_machine_phase(prev_phase_outputs):
 
 prev_phase_outputs = {
     'project': "An emoji-themed chess game written in javascript to run locally in the browser between two players"
+    # 'project': "A 2D platformer game where the player can jump and move around, swing and kill enemies with a grappling hook, and change the color of their pants"
 }
 
 phases = {
@@ -134,8 +135,6 @@ phases = {
     3: ('states', run_states_phase),
     4: ('machine', run_machine_phase)
 }
-
-project = "An emoji-themed chess game written in javascript to run locally in the browser between two players"
 
 def run_phase(run_num, phase_num):
     phase_name, phase_func = phases[phase_num]
@@ -152,7 +151,7 @@ print(run_num)
 
 
 # Use this to resume previously completed runs
-resume_run=33
+resume_run=112
 resume_from_phase=3
 copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
 prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)

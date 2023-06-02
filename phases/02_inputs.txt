@@ -19,8 +19,9 @@ Step 2: Skeptical refinement of Inputs
         - are potentially valid inputs for some programs, but are outside the scope of the specified MVP features
         - is unneccessary input, and happens naturally.
         - it is a duplicate of an earlier listed input.
+    - Since we want to focus on scrappiness, if there are multiple inputs which accomplish the same thing, favor de-duplication.
 - In this step,
-    - Think through each of the brainstormed inputs and determine if they are really inputs, or something else/outside scope.
+    - Think through each of the brainstormed inputs and determine if they are really inputs, or something else/outside scope, or duplicative.
     - Remove any inputs to refine the brainstormed list to only those strictly necessary.
 Deliverable: List of whether or not each element from Step 1 deliverable is indeed an input, or is instead something else. Format:
 # Step 2: Skeptical Refinement

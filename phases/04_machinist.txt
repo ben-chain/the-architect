@@ -20,12 +20,14 @@ Deliverable: list of all possible transtions and the subset of inputs they corre
     OR
     - No additional transitions are needed because [reason why existing transitions cover all cases]
 ...
+END INITIAL TRANSITIONS
+
 
 Step 2: Identify and missing transitions
-- In this step, for each input, we will look at the Initial Transitions and determine whether any INPUTS are missing from the list defined in step 1. Even if all meaningful transitions have been defined, we must consider all possible inputs to properly define a state machine.
+- In this step, for each input, we will look at the Initial Transitions and determine whether any INPUTS are missing from the list defined in step 1. Even if all meaningful transitions have been defined, we must consider all possible inputs to fully define the state machine.
     - A common example of a missing input would be "invalid" inputs which cause no-op transitions.
 - For each Input, look at the Initial transitions and brainstorm kinds of inputs which would be missing from the subsets for the Initial Transitions.
-- List all Inputs again in this step. If there are none missing, state that, with a justification for why the existing transitions cover all possible cases.
+- List all Inputs again in this step.
 - Then, write up the additional transitions needed for a full view of the system.
 Deliverable: list of additional transitions
 # Missing input brainstorm
@@ -40,22 +42,30 @@ Deliverable: list of additional transitions
     a. [Transition2Name]
         ...
 ...
+END ADDITIONAL TRANSITIONS
 
-Step 3: State Partition based on transitions
+Step 3: Brainstorm State Partitions Based on Transitions
 - Now that we have identified all of the possible transitions for the state machine, we need to break down the fundmanetal state into substates which logically correspond to the different transition types.
 - Based on the transitions identified in steps 2 and 3, write down subsets of the Fundamental State which are useful to move between via the transitions.
+- Write as many possible partitions as possible for consideration in this step.
 - These subsets should be identifiable based on conditions which only relate to the fundamental state itself, not the inputs which got it there.
 - Note that in this step we are NOT defining a hierarchy of state, we are just defining subsets of the possible fundamental states.
 - The top-level, numbered elements in this list should ONLY be the Fundamental States defined in previous phases and shared below. 
 - The subsets in the lettered elements in this list should ONLY be be subsets of the fundamental state for its corresponding number. You should NEVER describe a subset of one fundamental state based on a condition involving a different fundamental state.
+- If necessary to accurately reflect all transitions, create multiple partitions for each fundamental state. It should be the case that, for all transitions in steps 1 and 2, if "move from" or "move to" state is listed in the transition, that corresponds to a subset in one of the partitions in step 3.
 Deliverable: Named list of substates and description.  Format with [example]:
-# Final substate partition
+# Brainstormed substate partitions
 1. **[fundamental state 1]**
-    Subset 1 - **[State1IntegerSubset1Name]**: This is the subset of [fundamental state 1] corresponding to [when State1 integer exceeds N], relevant to [transition(s) it corresponds to]
-    Subset 2 - **[State1IntegerSubset2Name]**: This is the subset of [fundamental state 1] corresponding to [when State1 integer is less than or equal to N], relevant to [transition(s) it corresponds to]
+    - Partition 1
+        Subset 1 - **[State1IntegerSubset1Name]**: This is the subset of [fundamental state 1] corresponding to [when State1 integer exceeds N], relevant to [transition(s) it corresponds to]
+        Subset 2 - **[State1IntegerSubset2Name]**: This is the subset of [fundamental state 1] corresponding to [when State1 integer is less than or equal to N], relevant to [transition(s) it corresponds to]
+        ...
+    - Partition 2
+        ...
     ...
 2. **[fundamental state 2]**
-    Subset 1 - **[State2StringSubset1Name]**: This is the subset of [fundamental state 2] corresponding to [when State2 string has an odd number of characters], relevant to [transition(s) it corresponds to]
+    Partition 1
+        Subset 1 - **[State2StringSubset1Name]**: This is the subset of [fundamental state 2] corresponding to [when State2 string has an odd number of characters], relevant to [transition(s) it corresponds to]
     ...
 ...
 
@@ -74,32 +84,33 @@ Deliverable: State hierarchy in preparation to build Hierarchical State Machine.
     - NestedFundamentalStateW
 
 
-Step 5: Conceptual State Diagram
-- In this step, you will connect the "conceptual dots" of the state and input together to create a conceptual state diagram for the project, based on the transitions and state subsets defined above.
-- Each state in the state diagram should correspond to a SINGLE named state subset from the Step 3 paritions.
-- Each arrow in the state diagram should correspond to a SINGLE named transition defined above.
-- Utilize the State Hierarchy Tree to build the diagram, so that the top-level state is the outermost in the diagram. (In the example below, State 1 would have been placed at the top of the hierarchy, and below it would be State 2 and 3.)
+Step 5: Initital State Machine
+- In this step, we will craft a State Chart XML (SCXML) diagram to conceptually map out our state machine.
+- The task here is to tie together the identified fundamental states, their partitions, and the state transitions, according to the hierarchical structure outlined in the previous steps.
+- Each state in the SCXML should be represented as a unique combination of fundamental state partitions, not as the fundamental states themselves. Ensure that the fundamental states themselves do NOT appear as a parent state in the SCXML. Instead, use the individual subsets (the more concrete, specific states) as the top-level states. This may lead to more combinations overall, but is more explicit and clear.
+- Importantly, the states should be organized according to the hierarchy we determined earlier. This means that nested states are represented as subsets within their respective parent states. Use the notation State1Subset.State2Subset to describe these hierarchical relationships in the SCXML.
+- Make sure that all transitions are properly defined for each state and are named according to the transitions defined in previous steps.
+    - This means that all transition events should be only the previously named transitions from Steps 1 and 2, and not something additionally made up now.
 
-Deliverable: State Diagram, formatted in markdown-wrapped plantUML.  An example syntax is provided below:
-# Initial State Diagram
-```plantuml
-@startuml
-[*] --> State1Subset1
+Deliverable: Initial State Machine SCXML. Format:
+# Initial Machine
+```xml
+<scxml [...]
+```
 
-state State1Subset1 {{
-  State2Subset1 --> State2Subset2 : Transition1Name
-  State2Subset2 --> State2Subset1 : Transition2Name
-
-}}
-
-State State1Subset2 {{
-  State3Subset1 --> State3Subset2 : Transition3Name
-  State3Subset2 --> State3Subset1 : Transition4Name
-}}
-
-State1Subset1 --> State1Subset2 : Transition5Name
-
-@enduml
+Step 6: Revise State Machine
+- In this step, we will examine the previously created state machine and seek to identify:
+    - Logical inconsistencies
+    - Missing transitions or subsets from previous steps
+    - Misplaced transitions
+- Start by keeping an open mind about what problems there might potentially be, and write them out.
+- Then, write an improved SCXML file
+Deliverable: Consideration of inconsistencies and revised machine.  Format:
+# Potential inconsistencies, errors, and missing elements
+[long list of potential things to fix, as explained above]
+# Final Machine
+```xml
+[new scxml]
 ```
 
 
