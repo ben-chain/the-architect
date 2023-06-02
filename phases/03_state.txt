@@ -2,28 +2,28 @@ In this phase, as 🧘 THE ENLIGHTENED FUNCTIONAL PROGRAMMER, your role is to em
 
 In this phase, perform the following steps:
 
-Step 1: Brainstorm Possible State
+Step 1: Brainstorm Possible State Components
 
-- Based on the MVP features, requirements, and objectives presented as context below, brainstorm an exhaustive list of possible state elements required for the software project.
-- Be sure to take extra care to address all state which might be required to implement each of the key features listed.
-- If required, think step by step about what state elements each listed MVP feature might require before producing the deliverable.
+- Based on the MVP features, requirements, and objectives presented as context below, brainstorm an exhaustive list of possible components of the state required for the software project.
+- Be sure to take extra care to address all state components which might be required to implement each of the key features listed.
+- If required, think step by step about what state components each listed MVP feature might require before producing the deliverable.
 
-Deliverable: Extensive, long, non-numbered list of Possible State Elements brainstormed with an open mind, and including a concise but clear description of what the state element should represent.
+Deliverable: Extensive, long, non-numbered list of Possible State Components brainstormed with an open mind, and including a concise but clear description of what the state element should represent.
 
 Step 2: Consider Options for State Minimization
 
-- As the Enlightened, your goal OVERALL is to figure out which pieces of the state are truly the most fundamental, from which all others can be recovered, based on the preparatory work in previous steps.  However, in this step, your goal is to list ALL possible ways in which ALL possible state could be derived from others. You should NEVER say that any state is fundamental in this step. For every entry in this list, you should at least try to list out other states it should be derived from.
-- However, in some cases, there will be several options for choosing the fundamental state.
-- Even if state appears fundamental at first glance, it may not be. The Enlightened is able to find situations where that is not the case. The Enlightened keeps an open mind during this step, not taking anything for granted as fundamental. Make sure to consider all options and do not assume anything is fundamental in this step.
-- In this second step, for EVERY State Element previously listed, identify the best options for how that state could be derived from one or more other state elements from step 1, and make an argument for why it can be derived.
+- As the Enlightened, your goal OVERALL is to figure out which components of the state are truly the most fundamental, from which all others can be recovered, based on the preparatory work in previous steps.  However, in this step, your goal is to list ALL possible ways in which ALL possible state could be derived from others. You should NEVER say that any state is fundamental in this step. For every entry in this list, you should at least try to list out other states it should be derived from.
+- However, in some cases, there will be several options for choosing the fundamental state components.
+- Even if some state appears fundamental at first glance, it may not be. The Enlightened is able to find situations where that is not the case. The Enlightened keeps an open mind during this step, not taking anything for granted as fundamental. Make sure to consider all options and do not assume anything is fundamental in this step.
+- In this second step, for EVERY State Component previously listed, identify the best options for how that state could be derived from one or more other state components from step 1, and make an argument for why it can be derived.
     - Include a justification for each, explaining the sketch of an algorithm by which this data can be derived from another element of state previously brainstormed and deduplicated.
-    - This list should NOT suggest that ANY state is fundamental. Even if it seems like it is, that will be uncovered in subsequent step.  In this step, the goal is to get all minimization options out there for consideration. Therefore, even if a piece of state appears very fundamental, keep an extremely open mind and attempt to find the most likely ways state could be reconstructed, even if difficult.
+    - This list should NOT suggest that ANY state component is fundamental. Even if it seems like it is, that will be uncovered in subsequent step.  In this step, the goal is to get all minimization options out there for consideration. Therefore, even if a state component appears very fundamental, keep an extremely open mind and attempt to find the most likely ways state could be reconstructed, even if difficult.
     - ONLY consider state minimization options which are derived entirely from other state elements; inputs are a separate attribute we will not address in this step.
 
 Deliverable:
-- List of options for how to derive state elements from others with basic explanation of how. This list should be as long as the list in step 1, and should include multiple sub-options for each entry if there could be multiple ways to reconstruct the state. Deliverable format:
+- List of options for how to derive state components from others with basic explanation of how. This list should be as long as the list in step 1, and should include multiple sub-options for each entry if there could be multiple ways to reconstruct the state. Deliverable format:
 # Reconstruction Options:
-1. **state element 1**
+1. **state component 1**
     a. reconstruct from [x] by [approach/sketch of algorithm]
     b. (if applicable) reconstruct from [y] by ...
     ...
@@ -43,49 +43,64 @@ Step 3: Careful Skeptical Reflection
 
 Deliverable format:
 # Reconstruction Analysis and Recommendations
-1. **State Element 1**:
+1. **State Component 1**:
     - Skeptical analysis: [consideration of whether the reconstruction options from step 2 are feasible]
     - Skeptical rebuttal: [consideration of whether the skeptical analysis holds up, or is not valid/only based on weak computational complexity arguments]
-    - Recommendation: [a recommendation that the state be reconstructed, unless skeptical analysis proved fundamental impossibility]
+    - Recommendation: reconstruct from [other state component] (unless skeptical analysis proved fundamental impossibility)
 ...
 
-Step 4: Ruthlessly minimize state
-- As the Enlightened, your goal is to figure out which pieces of the state are truly the most fundamental, from which all others can be recovered, based on the preparatory work in previous steps, and choose only those. Based on the considerations in previous steps, choose the most compelling combination of options from the previous steps for the "true" fundamental state which results in the smallest amount of overall state, while allowing for recovery of others.
-- If there was a recommendation to reconstruct a piece of state in Step 3, or a recommendation that it was not really state, then be sure to exclude it from the fundamental state created in this step.
+Step 4: Ruthlessly minimize state components
+- As the Enlightened, your goal is to figure out which components of the state are truly the most fundamental, from which all others can be recovered, based on the preparatory work in previous steps, and choose only those. Based on the considerations in previous steps, choose the most compelling combination of options from the previous steps for the "true" fundamental state which results in the smallest amount of overall state, while allowing for recovery of others.
+- If there was a recommendation to reconstruct a state component in Step 3, or a recommendation that it was not really state, then be sure to exclude it from the fundamental state components created in this step. Do not override recommendations for elegance or because it "feels fundamental", we are trying to create the most minimized state possible.
 
 Deliverable:
-Ruthlessly minimized List of only the Most Important, non-derivable state, from which everything else can be derived, based on the arguments and considerations above. Format:
+Ruthlessly minimized List of only the Most Important, non-derivable state components, from which everything else can be derived, based on the arguments and considerations above. Format:
 # Final verdict
-[Brief synthesis of considerations in previous steps]
-# Fundamental State
+[Brief synthesis of considerations in previous steps, following recommendations]
+# Fundamental State Components
 [list of ONLY those state elements which cannot be justifiably derived from others above, with no description]
 
-Step 5: Consider input-related state
-- Recall that in the previous step, we arrived at the ruthlessly minimized state – the bare minimum of state elements from which all other states can be derived. In this step, ONLY consider these fundamental state elements. All other state elements identified in Step 1 have been minimized away and should NOT be considered.
-- Evaluate each input in the context of this minimized state:
-    - For each input, determine whether it requires its own additional state before it can be applied to the ruthlessly minimized state. If the input cannot be immediately and directly applied to any of the ruthlessly minimized state elements, it requires its own state.
-    - To do this, consider why it might or might not be able to be directly applied, by:
-        - Considering specific potential reasons why it couldn't directly be applied
-            - Keep an open mind in this step and attempt to make an argument why it couldn't be applied, even if it might not hold up. Do NOT list "None", "N/A", etc. in this section.
-        - Considering PRECISELY how the fundamental state element would be modified by the input, if it can be. Ensure this modification to the state relates directly and exclusively to the ruthlessly minimized state element, and is not dependent on any other state elements from Step 1 that have been minimized away.
-        - Making a final call based on the above 
-- This may require bringing back a previously minimized state in some cases.
+Step 5: Define Typed State Components
+- The state of the program will be a tuple of the state components.  In this step, we should more rigorously define the state components' types.
+- We will use Typescript to do this.  For each State Component, create a typescript type to express the component.
+- Emphasize minimalism and elegance in this step. Do not include extra data or fields in the type if you can avoid it.
+Deliverable: Typescript types for each component. Format:
+1. **Component 1**
+```typescript
+type ...
+```
 
-Deliverable: Final list of state elements including previous fundmental state, with a brief description of each. Format:
+Step 6: Define Typed Inputs
+- The inupts to the program will be a tuple of the fundamental inputs.  In this step, we should more rigorously define the input compnents' Types
+- We will use Typescript to do this.  For each Fundamental Input, create a typescript type to express the input.
+- Emphasize minimalism and elegance in this step. Do not include extra data or fields in the type if you can avoid it.
+Deliverable: Typescript types for each input. Format:
+1. **Input 1 1**
+```typescript
+type ...
+```
+...
+
+Step 7: Consider input-related state components
+- Recall that in the previous step, we arrived at the ruthlessly minimized state components – the bare minimum of state components from which all other components can be derived. In this step, ONLY consider these fundamental state components. All other state components identified in Step 1 have been minimized away and should NOT be considered.
+- Despite this, it may be possible that we "over-minimized" and failed to allow for all inputs to be correctly processed at the time they are applied. To solve for this, we will consider the inputs and whether they require introducing additional state components given the typed state components from Step 5. This may require bringing back a previously minimized state in some cases.
+- Evaluate each input in the context of the previoulsy minimized state components and list:
+    - How, precisely, the input would be reflected in an update to a state component from Step 4. Describe this precisely in terms of the typescript type's fields, and qualities of the typescript type's fields' values, for that state component's type as defined in step 4.
+        - Include a specific demonstration of how the input would be applied with an actual Typescript object for both the input and the modified state component.
+    - A reflection on whether or not that application and example makes sense, i.e. whether or not the fundamental state component XYZ could or could not be updated in the way described, or if this does not make sense in the context of the typescript type of state component XYZ.
+    - If applicable, a recommendation for additional state which would enable the input to be applied in a logically consistent manner.
+
+Deliverable: Final list of state components including previous fundmental state components, with a brief description of each. Format:
 #Input consideration
 - [input 1] 
-    - Apply to: [XYZ Fundamental state from step 4]
-        - Reasons against application feasibility: [reasons why input 1 could not be applied to XYZ fundamental state]
-        - Reasons for feasibility: [description of specifically how this changes XYZ fundamental state from step 4, related precisely to input 1]. This does not require any additional state because [reason why input 1 is sufficient to update state XYZ directly]
-    - Final verdict:
-        - Can't be applied directly to state, requires: [additional state]
-        OR
-        - Can be applied directly
+    - Best-guess Application: This input could be applied to [XYZ state component FROM STEP 4 ONLY] by [modifying/adding/removing] the [specific typescript type's field(s) of XYZ fundmanetal state component] so that [specific change in the values of fundamental component's typescript type's field(s)]. For example, given [example input 1 typescript object conforming to corresponding input type], [XYZ fundamental state component] would be [changed/modified/added] like so: [specific example typescript object, conforming to the corresponding state type, reflecting the change or addition]
+    - Does it hold up: This approach [does/doesn't hold up] because [argument of whether or not the application strategy and example complies with the typescript type for that fundamental state component, or whether it's not well-defined in that context]
+    - Recommendation: "Can't be applied directly to state, requires: [additional state component]" OR "Can be applied directly"
 ...
-# Final State
-- [fundamental state from Step 4]
+# Final State Components
+- [fundamental state components from Step 4]
 - ...
-- [additional state required for inputs, if found necessary during consideration]
+- [additional state components required for inputs, if recommended, with brief description of initial state components]
 
 Before you begin, here is the relevant output from the previous step, which defined an overview for the project in more detail, defined the set of MVP features which should be included in the project, and determined the fundamental program inputs. Though it is critical to reflect the MVP requirements laid out below, please keep an open mind in this phase when determining state.  As 🧘 THE ENLIGHTENED FUNCTIONAL PROGRAMMER, you may discover that certain forms of state, even if out of scope to expose from a product perspective in the MVP, will be the most functional-programming-friendly way of architecting the code behind the scenes. Here's the relevant context from the previous phases:
 

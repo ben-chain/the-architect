@@ -2,19 +2,19 @@
 
 As 🔧 THE MACHINIST, your role in this phase is to take the MVP features, fundamental inputs, and fundamental state previously defined by the project and convert it into a properly typed state machine that will form the basis for engineering the project.
 
-The state machine has already been conceptually created, in that the fundamental state and inputs have been chosen.  So, throughout this phase, be sure to ONLY use those fundamental states and inputs which have been already specified.  Do NOT hallucinate or suggest any additional states or inputs which are not given in this prompt.
+The state machine has already been conceptually created, in that the fundamental state components and inputs have been chosen.  So, throughout this phase, be sure to ONLY use those fundamental state components and inputs which have been already specified.  Do NOT hallucinate or suggest any additional components or inputs which are not given in this prompt.
 
 
 Step 1: Define Transitions
 - In this step, we will define the ways in which each possible input could be partitioned into subsets.
-- The resulting subsets should be made such that all of the possible fundamental states can have transitions to and from it defined.
-- Always specify the qualities of the fundamental state which are transitioned or changed in this step.
+- The resulting subsets should be made such that all of the possible fundamental state components can have transitions to and from it defined.
+- Always specify the qualities of the fundamental state components which are transitioned or changed in this step.
 Deliverable: list of all possible transtions and the subset of inputs they correspond to.  Format:
 # Initial Transitions
 1. **[Input 1]**
     a. [Transition1Name]
         - Corresponds to subset of [Input 1] where [condition for subset of Input 1]
-        - Moves from [state subset X] to [state subset Y]
+        - Moves from [state component subset X] to [state component subset Y]
     a. [Transition2Name]
         ...
     OR
@@ -38,57 +38,57 @@ Deliverable: list of additional transitions
 1. **[Input 1]**
     a. [Transition1Name]
         - Corresponds to subset of [Input 1] where [condition for subset of Input 1]
-        - Moves from [state subset X] to [state subset Y]
+        - Moves from [state components subset X] to [state components subset Y]
     a. [Transition2Name]
         ...
 ...
 END ADDITIONAL TRANSITIONS
 
-Step 3: Brainstorm State Partitions Based on Transitions
-- Now that we have identified all of the possible transitions for the state machine, we need to break down the fundmanetal state into substates which logically correspond to the different transition types.
-- Based on the transitions identified in steps 2 and 3, write down subsets of the Fundamental State which are useful to move between via the transitions.
+Step 3: Brainstorm State Component Partitions Based on Transitions
+- Now that we have identified all of the possible transitions for the state machine, we need to break down the fundmanetal state components into subsets which logically correspond to the different transition types.
+- Based on the transitions identified in steps 2 and 3, write down subsets of the Fundamental State Components which are useful to move between via the transitions.
 - Write as many possible partitions as possible for consideration in this step.
 - These subsets should be identifiable based on conditions which only relate to the fundamental state itself, not the inputs which got it there.
-- Note that in this step we are NOT defining a hierarchy of state, we are just defining subsets of the possible fundamental states.
-- The top-level, numbered elements in this list should ONLY be the Fundamental States defined in previous phases and shared below. 
-- The subsets in the lettered elements in this list should ONLY be be subsets of the fundamental state for its corresponding number. You should NEVER describe a subset of one fundamental state based on a condition involving a different fundamental state.
-- If necessary to accurately reflect all transitions, create multiple partitions for each fundamental state. It should be the case that, for all transitions in steps 1 and 2, if "move from" or "move to" state is listed in the transition, that corresponds to a subset in one of the partitions in step 3.
-Deliverable: Named list of substates and description.  Format with [example]:
+- Note that in this step we are NOT defining a hierarchy of state, we are just defining subsets of the fundamental state components.
+- The top-level, numbered elements in this list should ONLY be the Fundamental State Components defined in previous phases and shared below. 
+- The subsets in the lettered elements in this list should ONLY be be subsets of the fundamental state for its corresponding number. You should NEVER describe a subset of one fundamental state component based on a condition involving a different fundamental state components.
+- If necessary to accurately reflect all transitions, create multiple partitions for each fundamental state components. It should be the case that, for all transitions in steps 1 and 2, if "move from" or "move to" state is listed in the transition, that corresponds to a subset in one of the partitions in step 3.
+Deliverable: Named list of component substates and description.  Format with [example]:
 # Brainstormed substate partitions
-1. **[fundamental state 1]**
+1. **[fundamental state component 1]**
     - Partition 1
-        Subset 1 - **[State1IntegerSubset1Name]**: This is the subset of [fundamental state 1] corresponding to [when State1 integer exceeds N], relevant to [transition(s) it corresponds to]
-        Subset 2 - **[State1IntegerSubset2Name]**: This is the subset of [fundamental state 1] corresponding to [when State1 integer is less than or equal to N], relevant to [transition(s) it corresponds to]
+        Subset 1 - **[StateComponent1IntegerSubset1Name]**: This is the subset of [fundamental state component 1] corresponding to [when State1Component integer exceeds N], relevant to [transition(s) it corresponds to]
+        Subset 2 - **[StateComponent1IntegerSubset2Name]**: This is the subset of [fundamental state component 1] corresponding to [when State1Component integer is less than or equal to N], relevant to [transition(s) it corresponds to]
         ...
     - Partition 2
         ...
     ...
-2. **[fundamental state 2]**
+2. **[fundamental state component 2]**
     Partition 1
-        Subset 1 - **[State2StringSubset1Name]**: This is the subset of [fundamental state 2] corresponding to [when State2 string has an odd number of characters], relevant to [transition(s) it corresponds to]
+        Subset 1 - **[StateComponent2StringSubset1Name]**: This is the subset of [fundamental state component 2] corresponding to [when StateComponent2 string has an odd number of characters], relevant to [transition(s) it corresponds to]
     ...
 ...
 
 Step 4: State Hierarchy Tree
-- In this step, with all state subsets and transitions defined, we must define a hierarchy of the fundamental state which will be transitioned to utilize in the state diagram.
-- Consider which of the fundamental states are the most abstract/high-level, vs. those that are more low-level and granular, to determine a good abstraction for the state machine.
+- In this step, with all state component subsets and transitions defined, we must define a hierarchy of the fundamental state components which will be transitioned to utilize in the state machine.
+- Consider which of the fundamental state components are the most abstract/high-level, vs. those that are more low-level and granular, to determine a good abstraction for the state machine.
 - If sufficiently complex, the hierarchy may nest in several layers, like a tree.
-- Only the Fundamental States should be listed in this hierarchy (NOT the subsets previously partitioned).
-Deliverable: State hierarchy in preparation to build Hierarchical State Machine.  Format:
+- Only the Fundamental State Components should be listed in this hierarchy (NOT the component subsets previously partitioned).
+Deliverable: State component hierarchy in preparation to build Hierarchical State Machine.  Format:
 # Considerations for State Hierarchy
 [internal step-by-step thinking and deliberation about why each of the fundamental states might be more fundamental or granular than others]
-# Final State Hierarchy
-- TopLevelFundmantalStateX
-    - NestedFundamentalStateY
-        - EvenMoreNestedFundamentalStateZ
-    - NestedFundamentalStateW
+# Final State Component Hierarchy
+- TopLevelFundmantalStateComponentX
+    - NestedFundamentalStateComponentY
+        - EvenMoreNestedFundamentalStateComponentZ
+    - NestedFundamentalStateComponentW
 
 
 Step 5: Initital State Machine
 - In this step, we will craft a State Chart XML (SCXML) diagram to conceptually map out our state machine.
-- The task here is to tie together the identified fundamental states, their partitions, and the state transitions, according to the hierarchical structure outlined in the previous steps.
-- Each state in the SCXML should be represented as a unique combination of fundamental state partitions, not as the fundamental states themselves. Ensure that the fundamental states themselves do NOT appear as a parent state in the SCXML. Instead, use the individual subsets (the more concrete, specific states) as the top-level states. This may lead to more combinations overall, but is more explicit and clear.
-- Importantly, the states should be organized according to the hierarchy we determined earlier. This means that nested states are represented as subsets within their respective parent states. Use the notation State1Subset.State2Subset to describe these hierarchical relationships in the SCXML.
+- The task here is to tie together the identified fundamental state components, their partitions, and the state transitions, according to the hierarchical structure outlined in the previous steps.
+- Each "state" (as in directly labelled in the SCXML) in the SCXML should be represented as a unique combination of fundamental state components partitions, not as the fundamental state components themselves. Ensure that the fundamental state components themselves do NOT appear as a parent state in the SCXML. Instead, use the individual subsets (the more concrete, specific state component subsets) as the top-level "states". This may lead to more combinations overall, but is more explicit and clear.
+- Importantly, the states should be organized according to the hierarchy we determined earlier. This means that nested states are represented as subsets within their respective parent states. Use the notation StateComponent1Subset.StateComponent2Subset to describe these hierarchical relationships in the SCXML.
 - Make sure that all transitions are properly defined for each state and are named according to the transitions defined in previous steps.
     - This means that all transition events should be only the previously named transitions from Steps 1 and 2, and not something additionally made up now.
 
@@ -114,7 +114,7 @@ Deliverable: Consideration of inconsistencies and revised machine.  Format:
 ```
 
 
-Before you begin, here is the relevant output from the previous phases, which defined an overview for the project, the set of MVP features, the program inputs, and the program's fundamental state:
+Before you begin, here is the relevant output from the previous phases, which defined an overview for the project, the set of MVP features, the program inputs, and the program's fundamental state components:
 
 A brief description of the project:
 {overview}
@@ -125,7 +125,7 @@ A list of the key MVP features for the project:
 The fundamental inputs to the project's program:
 {fundamental_inputs}
 
-The fundamental state of the project's program which the inputs will change:
+The fundamental state components of the project's program which the inputs will change:
 {fundamental_state}
 
 With that context, you should be ready to execute this phase!

@@ -14,11 +14,13 @@ from langchain.schema import (
     HumanMessage,
     SystemMessage
 )
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+
 from helpers import load_phase_file, get_run_num, write_phase_output, get_phase_output, copy_prev_phase_outputs, get_phase_num, update_prev_phase_outputs
 
 load_dotenv()
 
-chat = ChatOpenAI(temperature=0.5,model_name='gpt-4')
+chat = ChatOpenAI(streaming=True, callbacks=[StreamingStdOutCallbackHandler()], temperature=0.5,model_name='gpt-4')
 system_template = ""
 with open('system_template.txt', 'r') as file:
     system_template = file.read()
@@ -93,7 +95,7 @@ def run_states_phase(prev_phase_outputs):
     print('ran state_output phase:')
     print(state_output_full)
 
-    final_state_index = state_output_full.find("# Final State")
+    final_state_index = state_output_full.find("# Final State Components")
     fundamental_state = state_output_full[final_state_index:].strip()
     state_output_structured = {
         'fundamental_state': fundamental_state
@@ -152,12 +154,12 @@ print(run_num)
 
 # Use this to resume previously completed runs
 resume_run=112
-resume_from_phase=3
+resume_from_phase=2
 copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
 prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)
 
 # comment out the phase running if using above to resume runs
 # run_phase(run_num, 1)
 # run_phase(run_num, 2)
-# run_phase(run_num, 3)
-run_phase(run_num, 4)
+run_phase(run_num, 3)
+# run_phase(run_num, 4)
