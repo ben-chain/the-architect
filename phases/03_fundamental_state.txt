@@ -1,4 +1,4 @@
-In this phase, as 🧘 THE ENLIGHTENED FUNCTIONAL PROGRAMMER, your role is to embrace the design principles of functional programming and determine the key state elements required for the software project. By emphasizing the use of pure functions, immutability, and the avoidance of side effects, you will create a foundation for future phases to build upon with confidence.
+In this phase, as 🧘 THE ENLIGHTENED FUNCTIONAL PROGRAMMER, your role is to embrace the design principles of functional programming and determine the key state components required for the software project. By emphasizing the use of pure functions, immutability, and the avoidance of side effects, you will create a foundation for future phases to build upon with confidence.
 
 In this phase, perform the following steps:
 
@@ -58,49 +58,7 @@ Ruthlessly minimized List of only the Most Important, non-derivable state compon
 # Final verdict
 [Brief synthesis of considerations in previous steps, following recommendations]
 # Fundamental State Components
-[list of ONLY those state elements which cannot be justifiably derived from others above, with no description]
-
-Step 5: Define Typed State Components
-- The state of the program will be a tuple of the state components.  In this step, we should more rigorously define the state components' types.
-- We will use Typescript to do this.  For each State Component, create a typescript type to express the component.
-- Emphasize minimalism and elegance in this step. Do not include extra data or fields in the type if you can avoid it.
-Deliverable: Typescript types for each component. Format:
-1. **Component 1**
-```typescript
-type ...
-```
-
-Step 6: Define Typed Inputs
-- The inupts to the program will be a tuple of the fundamental inputs.  In this step, we should more rigorously define the input compnents' Types
-- We will use Typescript to do this.  For each Fundamental Input, create a typescript type to express the input.
-- Emphasize minimalism and elegance in this step. Do not include extra data or fields in the type if you can avoid it.
-Deliverable: Typescript types for each input. Format:
-1. **Input 1 1**
-```typescript
-type ...
-```
-...
-
-Step 7: Consider input-related state components
-- Recall that in the previous step, we arrived at the ruthlessly minimized state components – the bare minimum of state components from which all other components can be derived. In this step, ONLY consider these fundamental state components. All other state components identified in Step 1 have been minimized away and should NOT be considered.
-- Despite this, it may be possible that we "over-minimized" and failed to allow for all inputs to be correctly processed at the time they are applied. To solve for this, we will consider the inputs and whether they require introducing additional state components given the typed state components from Step 5. This may require bringing back a previously minimized state in some cases.
-- Evaluate each input in the context of the previoulsy minimized state components and list:
-    - How, precisely, the input would be reflected in an update to a state component from Step 4. Describe this precisely in terms of the typescript type's fields, and qualities of the typescript type's fields' values, for that state component's type as defined in step 4.
-        - Include a specific demonstration of how the input would be applied with an actual Typescript object for both the input and the modified state component.
-    - A reflection on whether or not that application and example makes sense, i.e. whether or not the fundamental state component XYZ could or could not be updated in the way described, or if this does not make sense in the context of the typescript type of state component XYZ.
-    - If applicable, a recommendation for additional state which would enable the input to be applied in a logically consistent manner.
-
-Deliverable: Final list of state components including previous fundmental state components, with a brief description of each. Format:
-#Input consideration
-- [input 1] 
-    - Best-guess Application: This input could be applied to [XYZ state component FROM STEP 4 ONLY] by [modifying/adding/removing] the [specific typescript type's field(s) of XYZ fundmanetal state component] so that [specific change in the values of fundamental component's typescript type's field(s)]. For example, given [example input 1 typescript object conforming to corresponding input type], [XYZ fundamental state component] would be [changed/modified/added] like so: [specific example typescript object, conforming to the corresponding state type, reflecting the change or addition]
-    - Does it hold up: This approach [does/doesn't hold up] because [argument of whether or not the application strategy and example complies with the typescript type for that fundamental state component, or whether it's not well-defined in that context]
-    - Recommendation: "Can't be applied directly to state, requires: [additional state component]" OR "Can be applied directly"
-...
-# Final State Components
-- [fundamental state components from Step 4]
-- ...
-- [additional state components required for inputs, if recommended, with brief description of initial state components]
+[numbered list of ONLY those state elements which cannot be justifiably derived from others above, with no description]
 
 Before you begin, here is the relevant output from the previous step, which defined an overview for the project in more detail, defined the set of MVP features which should be included in the project, and determined the fundamental program inputs. Though it is critical to reflect the MVP requirements laid out below, please keep an open mind in this phase when determining state.  As 🧘 THE ENLIGHTENED FUNCTIONAL PROGRAMMER, you may discover that certain forms of state, even if out of scope to expose from a product perspective in the MVP, will be the most functional-programming-friendly way of architecting the code behind the scenes. Here's the relevant context from the previous phases:
 

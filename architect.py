@@ -1,4 +1,5 @@
 import os
+import subprocess
 import json
 from dotenv import load_dotenv
 from langchain.chat_models import ChatOpenAI
@@ -95,13 +96,37 @@ def run_states_phase(prev_phase_outputs):
     print('ran state_output phase:')
     print(state_output_full)
 
-    final_state_index = state_output_full.find("# Final State Components")
+    final_state_index = state_output_full.find("# Fundamental State Components")
     fundamental_state = state_output_full[final_state_index:].strip()
     state_output_structured = {
         'fundamental_state': fundamental_state
     }
 
     return state_output_full, state_output_structured
+
+def run_refine_states_phase(prev_phase_outputs):
+    prompt = load_phase_file(get_phase_num('refine_state', phases))
+    human_message_prompt = HumanMessagePromptTemplate.from_template(prompt)
+    chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
+
+    project = prev_phase_outputs["project"]
+    overview = prev_phase_outputs["vision"]["overview"]
+    features = prev_phase_outputs["vision"]["features"]
+    fundamental_inputs = prev_phase_outputs["inputs"]["fundamental_inputs"]
+    fundamental_state = prev_phase_outputs["states"]["fundamental_state"]
+
+    refine_states_result = chat(chat_prompt.format_prompt(project=project, overview=overview, features=features, fundamental_inputs=fundamental_inputs, fundamental_state=fundamental_state).to_messages())
+    refine_states_full = refine_states_result.content
+
+    print('ran refine_states phase:')
+    print(refine_states_full)
+
+    refined_state_index = refine_states_full.find("# Final State Components")
+    refined_state = refine_states_full[refined_state_index:].strip()
+    refine_states_output_structured = {
+        'refined_state': refined_state
+    }
+    return refine_states_full, refine_states_output_structured
 
 def run_machine_phase(prev_phase_outputs):
     prompt = load_phase_file(get_phase_num('machine', phases))
@@ -126,6 +151,7 @@ def run_machine_phase(prev_phase_outputs):
 
     return machine_output_full, machine_output_structured
 
+
 prev_phase_outputs = {
     'project': "An emoji-themed chess game written in javascript to run locally in the browser between two players"
     # 'project': "A 2D platformer game where the player can jump and move around, swing and kill enemies with a grappling hook, and change the color of their pants"
@@ -135,7 +161,8 @@ phases = {
     1: ('vision', run_vision_phase),
     2: ('inputs', run_inputs_phase),
     3: ('states', run_states_phase),
-    4: ('machine', run_machine_phase)
+    4: ('refine_state', run_refine_states_phase),
+    5: ('machine', run_machine_phase)
 }
 
 def run_phase(run_num, phase_num):
@@ -153,13 +180,16 @@ print(run_num)
 
 
 # Use this to resume previously completed runs
-resume_run=112
-resume_from_phase=2
+resume_run=156
+resume_from_phase=4
 copy_prev_phase_outputs(resume_from_phase,resume_run,run_num)
 prev_phase_outputs = update_prev_phase_outputs(resume_from_phase, prev_phase_outputs, run_num, phases)
 
 # comment out the phase running if using above to resume runs
 # run_phase(run_num, 1)
 # run_phase(run_num, 2)
-run_phase(run_num, 3)
+# run_phase(run_num, 3)
 # run_phase(run_num, 4)
+run_phase(run_num, 5)
+
+subprocess.run(["afplay", "/System/Library/Sounds/Ping.aiff"])
