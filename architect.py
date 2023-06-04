@@ -137,9 +137,9 @@ def run_machine_phase(prev_phase_outputs):
     overview = prev_phase_outputs["vision"]["overview"]
     features = prev_phase_outputs["vision"]["features"]
     fundamental_inputs = prev_phase_outputs["inputs"]["fundamental_inputs"]
-    fundamental_state = prev_phase_outputs["states"]["fundamental_state"]
+    refined_state = prev_phase_outputs["refine_state"]["refined_state"]
 
-    machine_result = chat(chat_prompt.format_prompt(project=project, overview=overview, features=features, fundamental_inputs=fundamental_inputs, fundamental_state=fundamental_state).to_messages())
+    machine_result = chat(chat_prompt.format_prompt(project=project, overview=overview, features=features, fundamental_inputs=fundamental_inputs, refined_state=refined_state).to_messages())
     machine_output_full = machine_result.content
 
     print('ran machinist phase:')
